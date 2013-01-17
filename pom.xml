@@ -126,34 +126,37 @@
       </plugin-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-nar-plugin</artifactId>
-				<configuration>
-					<libraries>
-						<library>
-							<type>jni</type>
-							<narSystemPackage>rtmidi.swig</narSystemPackage>
-							<linkCPP>false</linkCPP>
-						</library>
-					</libraries>
-					<cpp>
-						<debug>true</debug>
-						<options>
-							<option>-D__LINUX_ALSA__</option>
-						</options>
-					</cpp>
-					<java>
-						<include>true</include>
-						<link>true</link>
-					</java>
-					<javah>
-						<excludes>
-							<exclude>rtmidi/swig/*.class</exclude>
-						</excludes>
-					</javah>
-					<linker>
-						<sysLibSet>pthread:shared, asound:shared, stdc++:shared</sysLibSet>
-					</linker>
-				</configuration>
+        <artifactId>maven-nar-plugin</artifactId>
+        <configuration>
+          <libraries>
+            <library>
+              <type>jni</type>
+              <narSystemPackage>rtmidi.swig</narSystemPackage>
+              <linkCPP>false</linkCPP>
+            </library>
+          </libraries>
+          <cpp>
+            <debug>true</debug>
+            <options>
+              <option>-D__MACOSX_CORE__</option>
+              <option>-framework</option>
+              <option>CoreMIDI</option>
+              <option>-framework</option>
+              <option>CoreAudio</option>
+              <option>-framework</option>
+              <option>CoreFoundation</option>
+            </options>
+          </cpp>
+          <java>
+            <include>true</include>
+            <link>true</link>
+          </java>
+          <javah>
+            <excludes>
+              <exclude>rtmidi/swig/*.class</exclude>
+            </excludes>
+          </javah>
+        </configuration>
 			</plugin>
 			<plugin>
 				<groupId>net.alchim31.maven</groupId>
@@ -177,17 +180,17 @@
               <includePath>src/rtmidi-2.0.1</includePath>
               <includePath>src/rtmidi-2.0.1/include</includePath>
             </includePaths-->
-							<sysLibSet>pthread:shared, asound:shared, stdc++:shared</sysLibSet>
+							<!--sysLibSet>pthread:shared, asound:shared, stdc++:shared</sysLibSet-->
 							<compilerOptions>
-								<compilerOption>-D__LINUX_ALSA__</compilerOption>
-								<compilerOption>-fPIC</compilerOption>
-              <!--compilerOtion>-D__MACOSX_CORE__</compilerOtion>
+								<!--compilerOption>-D__LINUX_ALSA__</compilerOption>
+								<compilerOption>-fPIC</compilerOption-->
+              <compilerOtion>-D__MACOSX_CORE__</compilerOtion>
               <compilerOption>-framework</compilerOption>
-              <compilerOption>CoreMIDI</compilerOtion>
+              <compilerOption>CoreMIDI</compilerOption>
               <compilerOption>-framework</compilerOption>
               <compilerOption>CoreAudio</compilerOption>
               <compilerOption>-framework</compilerOption>
-              <compilerOption>CoreFoundation</compilerOtion-->
+              <compilerOption>CoreFoundation</compilerOption>
 							</compilerOptions>
 							<force>true</force>
 						</configuration>

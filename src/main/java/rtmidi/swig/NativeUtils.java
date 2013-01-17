@@ -29,6 +29,7 @@ public class NativeUtils {
      public static void loadLibrary() throws Exception
      {
        String path = String.format("/lib/%s-%s-%s/jni/%s", getArchitecture(), getOS(), getLinker(), System.mapLibraryName("rtmidi-2.0.1-SNAPSHOT"));
+       path = path.replace(".dynlib", ".jnilib"); //HACK for compatibility on Mac JDK Oracle vs Apple
        NativeUtils.loadLibraryFromJar(path);
      }
 
